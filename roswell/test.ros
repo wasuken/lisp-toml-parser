@@ -1,0 +1,22 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp(ql:quickload '(:prove :cl-ppcre
+							 :parse-float :closure-html :toml-parser) :silent t))
+
+(defpackage :ros.script.test.3804818285
+  (:use :cl))
+(in-package :ros.script.test.3804818285)
+
+(defun main (&rest argv)
+  (declare (ignorable argv))
+  (handler-case
+	  (asdf:test-system :toml-parser)
+	(error (e)
+	  (format *standard-output* "~&Error: ~A~%" e)
+	  (uiop:quit -1))))
+;;; vim: set ft=lisp lisp:
