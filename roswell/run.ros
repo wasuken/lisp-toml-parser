@@ -5,7 +5,7 @@ exec ros -Q -- $0 "$@"
 |#
 (progn ;;init forms
   (ros:ensure-asdf)
-  #+quicklisp(ql:quickload '(:prove :cl-ppcre :parse-float
+  #+quicklisp(ql:quickload '(:rove :cl-ppcre :parse-float
 							 :closure-html :toml-parser) :silent t))
 
 (defpackage :ros.script.run.3804818277
@@ -15,7 +15,7 @@ exec ros -Q -- $0 "$@"
 (defun main (&rest argv)
   (declare (ignorable argv))
   (handler-case
-	  (my-scheme-2:run)
+	  (print "run")
 	(error (e)
 	  (format *standard-output* "~&Error: ~A~%" e)
 	  (uiop:quit -1))))
